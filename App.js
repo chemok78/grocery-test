@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react';
+import ReactNative from 'react-native';
 import * as firebase from 'firebase';
 const StatusBar = require('./components/StatusBar');
 const ActionButton = require('./components/ActionButton');
@@ -29,17 +29,15 @@ const config = {
 
 const firebaseApp = firebase.initializeApp(config);
 
-export default class App extends React.Component {
+export default class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    //ListView.DataSource, which is a class that provides efficient data processing to a ListView component.
     this.state = {
       dataSource: new ListView.DataSource({
-        rowHasChange: (row1, row2) => row1 !== row2,
+        rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
-    //get firebase reference in initialState
     this.itemsRef = this.getRef().child('items');
   }
 
@@ -124,12 +122,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
